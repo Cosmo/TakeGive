@@ -99,6 +99,42 @@ namespace TakeGive.Web.Controllers
             return dtos;
         }
 
+        // GET api/find?f=[x1,y,1]&s=[x2,y2]
+        [HttpGet]
+        [Route("api/find/bybox")]
+        public IEnumerable<FormattedItemDto> FindByBox(string f, string s)
+        {
+            var connectionString = RoleEnvironment.GetConfigurationSettingValue("MongoDbConnectionString");
+            var database = MongoDatabase.Create(connectionString);
+            var items = database.GetCollection<ItemDto>("item");
+
+            // flat,flng => <bottom left coordinates>
+            // slat,slng => <upper right coordinates>
+            var jsonQuery = "{ 'location' : { $geoWithin : { $box : [ [ " + f + " ] , [ " + s + " ] ] }}}";
+            var doc = BsonSerializer.Deserialize<BsonDocument>(jsonQuery);
+            var query = new QueryDocument(doc);
+            var results = items.Find(query).SetLimit(20);
+
+            var dtos = results.Select(
+                x => new FormattedItemDto()
+                         {
+                             Id = x.Id.ToString(),
+                             Category = x.Category,
+                             Description = x.Description,
+                             Keywords = x.Keywords,
+                             Name = x.Name,
+                             Picture = x.Picture,
+                             User = x.User,
+                             Location = new LocationDto()
+                                            {
+                                                Latitude = x.Location[0],
+                                                Longitude = x.Location[1]
+                                            }
+                         });
+
+            return dtos;
+        }
+
         // GET api/find?category={category}
         [HttpGet]
         [Route("api/find/bycategory")]
