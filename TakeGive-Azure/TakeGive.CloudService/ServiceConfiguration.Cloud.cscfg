@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="TakeGive.CloudService" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2014-06.2.4">
+  <Role name="TakeGive.Web">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <!-- MongoDb -->
+      <Setting name="MongoDbConnectionString" value="mongodb://takegive:1VHhYEpjX48wXjBGtRN5faPA6CvcNGUSSPe.n_jJZN8-@ds045087.mongolab.com:45087/takegive" />
+      <!-- Azure Diagnostics -->
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+    </ConfigurationSettings>
+  </Role>
+</ServiceConfiguration>
