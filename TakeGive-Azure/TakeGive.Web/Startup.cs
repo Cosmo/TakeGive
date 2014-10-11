@@ -1,6 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿// --------------------------------------------------------------------------------------------------------------------
+// <copyright file="Startup.cs" company="TakeGive.eu">
+//   TakeGive.eu
+// </copyright>
+// <summary>
+//   Defines the Startup type.
+// </summary>
+// --------------------------------------------------------------------------------------------------------------------
+
 using Microsoft.Owin;
 using Owin;
 
@@ -12,7 +18,6 @@ namespace TakeGive.Web
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAuth(app);
         }
     }
 }

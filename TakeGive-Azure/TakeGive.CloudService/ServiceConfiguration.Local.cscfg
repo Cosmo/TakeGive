@@ -5,8 +5,8 @@
     <ConfigurationSettings>
       <!-- MongoDb -->
       <Setting name="MongoDbConnectionString" value="mongodb://takegive:1VHhYEpjX48wXjBGtRN5faPA6CvcNGUSSPe.n_jJZN8-@ds045087.mongolab.com:45087/takegive" />
-      <!-- Diagnostics -->
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <!-- Storage Connection String -->
+      <Setting name="StorageConnectionString" value="DefaultEndpointsProtocol=http;AccountName=takegive;AccountKey=IhyObKo/4yzg0s0OgIncFnnLl9XsM19lFznbUwBrsAK4mX460kQy7dkK/xcDSNSCDZoHojyVVcJ6T6TDRfEy3w==" />
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>

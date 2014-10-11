@@ -9,6 +9,7 @@
 
 namespace TakeGive.Web.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using System.Globalization;
     using System.Linq;
@@ -19,38 +20,101 @@ namespace TakeGive.Web.Controllers
     using MongoDB.Bson;
     using MongoDB.Bson.Serialization;
     using MongoDB.Driver;
+    using MongoDB.Driver.Builders;
 
     using TakeGive.MongoDb.Dto;
 
     public class FindController : ApiController
     {
+        #region Fields
+
         private const double EarthRadius = 6378.0d; // km
 
         private readonly CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
 
+        #endregion
+
         // GET api/find?lat={lat}&lng={lng}&radius={radius}
-        public IEnumerable<GiveAwayDto> Get(double lat, double lng, double radius = 2.0d)
+        [HttpGet]
+        [Route("api/find/bypoint")]
+        public IEnumerable<ItemDto> FindByPoint(double lat, double lng, double radius = 2.0d)
         {
             var connectionString = RoleEnvironment.GetConfigurationSettingValue("MongoDbConnectionString");
             var database = MongoDatabase.Create(connectionString);
-            var giveAways = database.GetCollection<GiveAwayDto>("giveaway");
+            var items = database.GetCollection<ItemDto>("item");
 
             var maxDistanceString = (radius / EarthRadius).ToString(this.culture.NumberFormat);
             var jsonQuery = string.Format(
                 "{{ 'location' : {{ $geoWithin : {{ $centerSphere : [ [ {0} , {1} ] , {2} ] }} }} }}", 
-                lng.ToString(this.culture.NumberFormat), 
                 lat.ToString(this.culture.NumberFormat), 
+                lng.ToString(this.culture.NumberFormat), 
                 maxDistanceString);
 
             var doc = BsonSerializer.Deserialize<BsonDocument>(jsonQuery);
             var query = new QueryDocument(doc);
-            var results = giveAways.Find(query)
-                //.SetSortOrder(new SortByBuilder().Descending("publishedAt"))
-                .SetLimit(50);
+            var results = items.Find(query).SetLimit(20);
 
             var dtos = results.AsEnumerable();
 
             return dtos;
         }
+
+        // GET api/find?q={q}
+        [HttpGet]
+        [Route("api/find/byquery")]
+        public IEnumerable<ItemDto> FindByQuery(string q)
+        {
+            var connectionString = RoleEnvironment.GetConfigurationSettingValue("MongoDbConnectionString");
+            var database = MongoDatabase.Create(connectionString);
+            var items = database.GetCollection<ItemDto>("item");
+
+            var queryKeywords = q
+                .ToLower()
+                .Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+            var query = Query<ItemDto>.In(x => x.Keywords, queryKeywords);
+            var results = items.Find(query).SetLimit(20);
+
+            var dtos = results.AsEnumerable();
+
+            return dtos;
+        }
+
+        // GET api/find?p=[[x1,y1],[x2,y2],[x3,y3]]
+        [HttpGet]
+        [Route("api/find/bypolygon")]
+        public IEnumerable<ItemDto> FindByPolygon(string p)
+        {
+            var connectionString = RoleEnvironment.GetConfigurationSettingValue("MongoDbConnectionString");
+            var database = MongoDatabase.Create(connectionString);
+            var items = database.GetCollection<ItemDto>("item");
+
+            var jsonQuery = "{ 'location' : { $geoWithin : { $polygon : [ " + p + " ] }}}";
+            var doc = BsonSerializer.Deserialize<BsonDocument>(jsonQuery);
+            var query = new QueryDocument(doc);
+            var results = items.Find(query).SetLimit(20);
+
+            var dtos = results.AsEnumerable();
+
+            return dtos;
+        }
+
+        // GET api/find?category={category}
+        [HttpGet]
+        [Route("api/find/bycategory")]
+        public IEnumerable<ItemDto> FindByCategory(string category)
+        {
+            var connectionString = RoleEnvironment.GetConfigurationSettingValue("MongoDbConnectionString");
+            var database = MongoDatabase.Create(connectionString);
+            var items = database.GetCollection<ItemDto>("item");
+
+            var query = Query<ItemDto>.EQ(x => x.Category, category);
+            var results = items.Find(query).SetLimit(20);
+
+            var dtos = results.AsEnumerable();
+
+            return dtos;
+        }
+
     }
 }

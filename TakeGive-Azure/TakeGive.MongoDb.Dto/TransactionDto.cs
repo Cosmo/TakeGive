@@ -23,7 +23,7 @@ namespace TakeGive.MongoDb.Dto
         [BsonElement("userTaking", Order = 2)]
         public UserDto UserTaking { get; set; }
 
-        [BsonElement("giveAway", Order = 3)]
-        public GiveAwayDto GiveAway { get; set; }
+        [BsonElement("item", Order = 3)]
+        public ItemDto Item { get; set; }
     }
 }

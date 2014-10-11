@@ -46,7 +46,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GiveAwayDto.cs" />
+    <Compile Include="ItemDto.cs" />
     <Compile Include="StoreDto.cs" />
     <Compile Include="TransactionDto.cs" />
     <Compile Include="UserDto.cs" />
