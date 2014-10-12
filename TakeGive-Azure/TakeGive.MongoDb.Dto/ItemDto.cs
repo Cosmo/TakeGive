@@ -18,7 +18,7 @@ namespace TakeGive.MongoDb.Dto
 
     public class ItemDto
     {
-        [JsonProperty(PropertyName = "id")]
+        [JsonProperty(PropertyName = "_id")]
         [BsonId(Order = 0)]
         public ObjectId Id { get; set; }
 

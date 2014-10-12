@@ -1,0 +1,17 @@
+c:\Projects\TakeGive\TakeGive\TakeGive.MongoDb\bin\Debug\TakeGive.MongoDb.dll
+c:\Projects\TakeGive\TakeGive\TakeGive.MongoDb\bin\Debug\TakeGive.MongoDb.pdb
+c:\Projects\TakeGive\TakeGive\TakeGive.MongoDb\bin\Debug\MongoDB.Bson.dll
+c:\Projects\TakeGive\TakeGive\TakeGive.MongoDb\bin\Debug\MongoDB.Driver.dll
+c:\Projects\TakeGive\TakeGive\TakeGive.MongoDb\bin\Debug\MongoDB.Bson.xml
+c:\Projects\TakeGive\TakeGive\TakeGive.MongoDb\bin\Debug\MongoDB.Driver.xml
+c:\Projects\TakeGive\TakeGive\TakeGive.MongoDb\obj\Debug\TakeGive.MongoDb.csprojResolveAssemblyReference.cache
+c:\Projects\TakeGive\TakeGive\TakeGive.MongoDb\obj\Debug\TakeGive.MongoDb.dll
+c:\Projects\TakeGive\TakeGive\TakeGive.MongoDb\obj\Debug\TakeGive.MongoDb.pdb
+C:\Projects\TakeGive\TakeGive-Azure\TakeGive.MongoDb\obj\Debug\TakeGive.MongoDb.dll
+C:\Projects\TakeGive\TakeGive-Azure\TakeGive.MongoDb\bin\Debug\TakeGive.MongoDb.dll
+C:\Projects\TakeGive\TakeGive-Azure\TakeGive.MongoDb\bin\Debug\TakeGive.MongoDb.pdb
+C:\Projects\TakeGive\TakeGive-Azure\TakeGive.MongoDb\bin\Debug\MongoDB.Bson.dll
+C:\Projects\TakeGive\TakeGive-Azure\TakeGive.MongoDb\bin\Debug\MongoDB.Driver.dll
+C:\Projects\TakeGive\TakeGive-Azure\TakeGive.MongoDb\bin\Debug\MongoDB.Bson.xml
+C:\Projects\TakeGive\TakeGive-Azure\TakeGive.MongoDb\bin\Debug\MongoDB.Driver.xml
+C:\Projects\TakeGive\TakeGive-Azure\TakeGive.MongoDb\obj\Debug\TakeGive.MongoDb.pdb
