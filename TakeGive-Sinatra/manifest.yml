@@ -1,0 +1,8 @@
+applications:
+- name: takegive
+  host: takegive
+  disk: 1024M
+  path: .
+  domain: mybluemix.net
+  mem: 256M
+  instances: 1
